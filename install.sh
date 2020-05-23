@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 # on se déplace vers le dossier de travail
 echo "$0"
 echo "$(dirname "${0}")"
