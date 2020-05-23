@@ -1,3 +1,4 @@
+#!./envs/bin/python
 # -*- coding: utf-8 -*-
 """
     Petite interface graphique pour gagner du temps dans l'écriture des 

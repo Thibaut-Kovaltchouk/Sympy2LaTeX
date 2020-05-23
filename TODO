@@ -1,8 +1,4 @@
-Tester l'utilisation sans conda d'installé
-s'occuper de creerTelechargementMinimal.py
 Avoir des retours sur plusieurs plate-formes
 "Nettoyer" l'appel à la bibliothèque SymPy dans le script
-Mieux mettre en forme le README.md :
-- installation de conda
-- qui est concerné par les différents choix
-- comment lancer un *.sh
+Personnaliser l'imprimante latex pour avoir des d droits et supprimer quelques simplifications automatiques
+Trouver une solution pour créer un raccourci sous Lubuntu
