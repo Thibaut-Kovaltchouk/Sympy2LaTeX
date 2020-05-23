@@ -20,9 +20,9 @@ Choix déconseillé car votre installation de Conda et Python n'est pas forcéme
 
 ### Choix 2 (conseillé)
 
-Une fois le téléchargement fini, vous installer le dossier là où vous voulez le voir apparaître puis vous lancez install.sh pour créer l'environnement conda local (juste besoin d'un droit d'écriture du dossier normalement).
+Une fois le téléchargement fini, vous installer le dossier là où vous voulez le voir apparaître puis vous lancez install.sh (pour mac et linux) ou install.bat (pour windows) pour créer l'environnement conda local (juste besoin d'un droit d'écriture du dossier normalement).
 
-Pour l'utilisation, tout ce qu'il vous reste à faire, c'est de lancer le fichier SymPy2LaTeX.sh (pour mac et linux) ou SymPy2LaTeX.bat (pour windows) avec une commande bash. Pour ajouter des raccourcis, vous avez accès à des icônes.
+Pour l'utilisation, tout ce qu'il vous reste à faire, c'est de lancer le fichier SymPy2LaTeX.sh (pour mac et linux) ou SymPy2LaTeX.bat (pour windows) avec une commande bash. Pour créer des raccourcis (ça peut être pratique), vous avez accès à des icônes.
 
 **Si vous ne savez pas comment lancez un fichier \*.sh ou \*.bat sur votre système d'exploitation, des liens sont donnés dans la suite du texte**
 
@@ -47,14 +47,11 @@ Conseil pour les distribution LaTeX : MacTeX pour Mac, TeX Live pour Linux et Mi
 * Pour MiKTeX : https://miktex.org/download
 * Pour Linux : utilisez votre gestionnaire de paquet préféré.
 
-#### Guide pour lancer des fichiers shell suivant votre OS (\*.sh)
+#### Guide pour lancer des fichiers shell suivant votre OS (\*.sh ou \*.bat)
 
 * Pour Mac : https://support.apple.com/fr-fr/guide/terminal/apdd100908f-06b3-4e63-8a87-32e71241bab4/mac
 * Pour Linux : dans le terminal correspondant à la fenêtre (F4 sur Lubuntu) : bash fichier.sh
-* Pour Windows : 
-    * Installer et faire fonctionner win-bash : http://win-bash.sourceforge.net/ puis, dans le terminal, bash cheminRelatifCompletFichier\_sh ou bash cheminAbsoluFichier\_sh
-    * Ou utiliser le shell bash Linux sous Windows : https://korben.info/installer-shell-bash-linux-windows-10.html
-    * dans le terminal, bash cheminRelatifCompletFichier\_sh ou bash cheminAbsoluFichier\_sh (pour récupérer cela efficacement, utilisez la barre de navigation Windows ou sinon, clique droit propriété)
+* Pour Windows : double-cliquer sur les fichiers \*.bat.
 
 ## Astuce 
 
