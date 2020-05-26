@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>418</height>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Sympy2LaTeX</string>
+   <string>SymPy2LaTeX</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../shortcut/icon/SymPy2LaTeX.png</normaloff>../shortcut/icon/SymPy2LaTeX.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -98,7 +102,8 @@ e = Limit((1+1/n)**n, n, oo)</string>
           <item>
            <widget class="QPushButton" name="generate">
             <property name="text">
-             <string>Générer png</string>
+             <string>Visualisation 
+(nécessite LaTeX)</string>
             </property>
            </widget>
           </item>
@@ -134,44 +139,7 @@ e = Limit((1+1/n)**n, n, oo)</string>
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Mettez un logiciel de 
-visualisation png très rapide :</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QLineEdit" name="viewer">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>250</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>400</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>mspaint</string>
-            </property>
-            <property name="readOnly">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <layout class="QHBoxLayout" name="horizontalLayout_2"/>
         </item>
         <item>
          <spacer name="verticalSpacer_3">

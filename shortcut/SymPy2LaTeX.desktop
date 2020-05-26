@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Link
+Name=SymPy2LaTeX
+Comment=Convertisseur Sympy vers latex interractif
+Keywords=latex;sympy;discord;équation;
+Icon=/home/tkovaltc/ProjetsGitHub/Sympy2LaTeX/shortcut/icon/SymPy2LaTeX.svg 
+URL=/home/tkovaltc/ProjetsGitHub/Sympy2LaTeX/SymPy2LaTeX.py

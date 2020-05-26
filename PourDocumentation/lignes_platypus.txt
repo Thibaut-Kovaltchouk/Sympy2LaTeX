@@ -1,0 +1,4 @@
+script de lancement :/Users/jsmith/Downloads/Sympy2LaTeX-master/envs/bin/python
+script qui doit devenir une app :/Users/jsmith/Downloads/Sympy2LaTeX-master/SymPy2LaTeX.py
+
+si vous n'avez pas bougé le dossier téléchargé de vos téléchargements bien sûr, à adapter

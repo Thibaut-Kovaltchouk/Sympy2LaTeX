@@ -8,5 +8,5 @@ eval "$(conda shell.bash hook)"
 # un environnement doit être déjà présent avec python 3.7
 conda activate ./envs
 echo environnement conda activé
-conda install --channel conda-forge python=3.7 sympy=1.5 PyQt pyperclip=1.7 -y
+conda install --channel conda-forge sympy=1.5 PyQt pyperclip=1.7 -y
 echo installation terminé

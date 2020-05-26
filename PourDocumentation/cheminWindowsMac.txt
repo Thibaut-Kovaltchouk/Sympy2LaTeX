@@ -1,0 +1,16 @@
+Chemins d'installation par défaut :
+
+Windows : (global ou local)
+C:\ProgramData\miniconda3
+C:\Users\jsmith\miniconda3 
+
+Mac : (global ou local)
+/Users/jsmith/opt/miniconda3/bin
+/opt/miniconda3/bin 
+
+Linux : (local)
+/Home/jsmith/miniconda3/bin
+
+(jsmith à remplacer par le nom de votre session)
+
+export PATH="/opt/miniconda3/bin:$PATH"

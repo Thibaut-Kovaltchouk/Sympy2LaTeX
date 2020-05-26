@@ -10,25 +10,86 @@
     TK
 """
 
-## visionneur par défaut : à changer
-# mettre le chemin d'accès complet
-# si ça ne marche pas en ne mettant 
-# que le nom du logiciel
-visio = "mspaint" # a priori, pour Windows
-# Attention : dvipng à installer pour Linux
-# (avec votre gestionnaire de packet préféré)
-# ça devrait pas poser de problème
-# visio = "lximage-qt" # a priori, pour Lubuntu
-# TODO compléter pour tous les OS possibles
+def latex2showPng(eqlatex):
+    def os_open(filePath):
+        """
+            Demande au système d'exploitation d'ouvrir le fichier
+            d'adresse filePath
+        """
+        osType = system()
+        if osType == 'Linux':
+            # a priori la commande la plus générique pour tous les Linux
+            subprocess.call(["xdg-open", filePath])
+        elif osType == 'Darwin':
+            # pour les mac
+            subprocess.call(["open", filePath])
+        else : # osType == 'Windows':
+            # pas réussi à passer par un subprocess... mais ça marche !
+            os.startfile(filePath)
+    """
+        Passe du latex vers un png qui s'ouvre
+    """
+    # on se place dans un dossier temporaire
+    tempdir = tempfile.mkdtemp()
+    # on crée un document latex de style minimal 
+    f = open(tempdir+"/generique.tex","w")
+    corps = "\\documentclass[12pt]{minimal}\n" \
+            "\\usepackage{amsmath,amsfonts}" \
+            "\\begin{document}\n"\
+            "$$"+eqlatex+"$$"\
+            "\\end{document}"
+    f.write(corps)
+    f.close()
+    # on utilise latex pour le passer en dvi 
+    subprocess.check_call([ "latex", 
+                            "-interaction=nonstopmode", 
+                            "generique.tex"],
+                            cwd=tempdir)
+    # puis dvipng pour avoir un png
+    # subprocess.check_call([ "dvipng",
+    #                         "’-T tight’",
+    #                         "-D 600",
+    #                         "-bg='Transparent'",
+    #                         "generique.dvi"], 
+    #                         cwd=tempdir)
+    subprocess.check_call([ "dvipng",
+                        "-T","tight",
+                        "-D 600",
+                        "generique.dvi"], 
+                        cwd=tempdir)
+    # et on ouvre finalement ce png
+    os_open(tempdir+'/generique1.png')
+
+def text2latex(text):
+    """
+        Passe d'un texte en langage SymPy à du latex
+    """
+    # on règle le problème des égalités en divisant l'expression
+    # en un terme LHS et un RHS
+    Lexpr = text.split("=")
+    out = ''
+    for i, side in enumerate(Lexpr):
+        if i > 0: # pour RHS
+            out += " = "
+        try :
+            out += latex(parse_expr(side.strip(),evaluate=False))
+        except:
+            print("Analyse/Lecture de :", side.strip())
+            print("Erreur dans la lecture :", sys.exc_info()[0])
+    return out
+
 
 ## Bibliothèque à installer
-# conda install pyperclip, sympy, PyQt
 import pyperclip as clipboard
-from sympy import oo, I, Matrix
-from sympy.functions import *
+# from sympy import oo, I, Matrix
+# from sympy.functions import *
 from sympy.parsing.sympy_parser import parse_expr
-from sympy import latex, preview
+from sympy import latex
 import sys
+import os
+import tempfile
+import subprocess
+from platform import system
 from PyQt5.QtWidgets import*
 from PyQt5.uic import loadUi
 
@@ -49,23 +110,17 @@ class Widget(QMainWindow):
 
         QMainWindow.__init__(self)
         
-        loadUi("SymPy2LaTeX.ui",self)
+        loadUi("interfaceQt/SymPy2LaTeX.ui",self)
         
-        # Attribut correspondant au format désiré de sortie 
-        self.OutputFormat = "MathBot"
         # Attribut correspondant au texte copié dans le presse-papier 
         self.OutputTxt = ""
-
-        # on prend en compte la valeur par défaut précisé par l'utilisateur
-        # au début du script
-        self.viewer.setText(visio)
 
         # Boutons génération png
         # connexion à la méthode pngGenerateAndShow
         self.generate.clicked.connect(self.pngGenerateAndShow)
         
-        # Boutons génération png
-        # connexion à la méthode pngGenerateAndShow
+        # Boutons copie dans le presse-papier
+        # connexion à la méthode copyLatex2Clipboard
         self.copy.clicked.connect(self.copyLatex2Clipboard)
           
     def texGenerate(self):
@@ -75,18 +130,7 @@ class Widget(QMainWindow):
             la boite de dialogue "inputUser".
         """
         input = self.inputUser.toPlainText()
-        # on règle le problème des égalités en divisant l'expression
-        # en un terme LHS et un RHS
-        Lexpr = input.split("=")
-        self.OutputTxt = ''
-        for i, side in enumerate(Lexpr):
-            if i > 0: # pour RHS
-                self.OutputTxt += " = "
-            try :
-                self.OutputTxt += latex(parse_expr(side.strip(),evaluate=False))
-            except:
-                print("Parsing de :", side.strip())
-                print("Erreur dans la lecture :", sys.exc_info()[0])
+        self.OutputTxt = text2latex(input)
 
     def pngGenerateAndShow(self):
         """
@@ -98,29 +142,18 @@ class Widget(QMainWindow):
         """
         self.texGenerate()
         try :
-            # Début du fichier LaTeX avec réglage de la taille
-            # afin de limiter la pixellisation
-            debut = "\\documentclass[12pt]{minimal}\n" \
-                    "\\usepackage{amsmath,amsfonts}" \
-                    "\\begin{document}" \
-                    "\\fontsize{60}{72}\n"
-            softwareViewer = self.viewer.text()
-            preview("$$" + self.OutputTxt + "$$", 
-                euler=False,
-                output='png',
-                preamble = debut,
-                viewer=softwareViewer)
+            latex2showPng(self.OutputTxt)
         except:
-            print("string LaTeX :", self.OutputTxt)
-            print("Visonneuse :", softwareViewer)
-            print("Erreur dans la génération du png : ", sys.exc_info()[0])
+            # gestion de l'erreur très (trop ?) minimaliste
+            print("Erreur génération/ouverture png : ", sys.exc_info()[0])
+            print("Equation concernée :", self.OutputTxt)
 
     def copyLatex2Clipboard(self):
         """
             On rajoute la mise en forme nécessaire pour 
             faire fonctionner les bots Discord
         """
-        self.texGenerate() # on (re)génère le latex juste avant, on sait jamais
+        self.texGenerate() # on (re)génère le latex juste avant
         self.OutputTxt
         if self.TeX_Displayed.isChecked():
             out = "\\[\n\\displaystyle" + self.OutputTxt + "\n\\]"
@@ -130,7 +163,7 @@ class Widget(QMainWindow):
             out = "= tex \\displaystyle " + self.OutputTxt
         else :
             out = "$$ \\displaystyle " + self.OutputTxt + "$$"
-        # co
+        # copie dans le presse-papier
         clipboard.copy(out)
         clipboard.paste()
 
