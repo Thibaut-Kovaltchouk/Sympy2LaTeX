@@ -82,10 +82,6 @@ Pour l'instant, les tests ont montrés : (je suis seul à avoir testé pour l'in
 - [ ] Windows 10 : MiKTeX + miniconda (sur le principe, mais pas cette version)
 - [ ] MacOS Catalina : MacTeX + miniconda (sur le principe, mais pas cette version)
 
-## Bug connu
-
-* Je n'arrive pas à créer un lanceur efficace sous Linux : la fenêtre se ferme tout de suite.
-
 ## Résolution d'un bug basique
 
 Si cela a marché mais que cela ne marche plus, essayer de supprimer le dossier envs et de relancer install.sh/bat (suivant votre système d'expoitation). Sinon, clonez de nouveau ce dépôt.
