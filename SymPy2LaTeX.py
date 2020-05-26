@@ -10,7 +10,23 @@
     TK
 """
 
+## Bibliothèque à installer avant : pyperclip, PyQt et sympy
+import pyperclip as clipboard
+from sympy.parsing.sympy_parser import parse_expr
+from sympy import latex
+import sys
+import os
+import tempfile
+import subprocess
+from platform import system
+from PyQt5.QtWidgets import*
+from PyQt5.uic import loadUi
+
+## fonctions utiles pour la suite : peuvent être utilisées à part de ce projet !
 def latex2showPng(eqlatex):
+    """
+        Passe du latex vers un png qui s'ouvre
+    """
     def os_open(filePath):
         """
             Demande au système d'exploitation d'ouvrir le fichier
@@ -26,9 +42,6 @@ def latex2showPng(eqlatex):
         else : # osType == 'Windows':
             # pas réussi à passer par un subprocess... mais ça marche !
             os.startfile(filePath)
-    """
-        Passe du latex vers un png qui s'ouvre
-    """
     # on se place dans un dossier temporaire
     tempdir = tempfile.mkdtemp()
     # on crée un document latex de style minimal 
@@ -38,6 +51,8 @@ def latex2showPng(eqlatex):
             "\\begin{document}\n"\
             "$$"+eqlatex+"$$"\
             "\\end{document}"
+    # print(corps) Illustration TD PSI* ;)
+    # print(list(corps))
     f.write(corps)
     f.close()
     # on utilise latex pour le passer en dvi 
@@ -45,13 +60,6 @@ def latex2showPng(eqlatex):
                             "-interaction=nonstopmode", 
                             "generique.tex"],
                             cwd=tempdir)
-    # puis dvipng pour avoir un png
-    # subprocess.check_call([ "dvipng",
-    #                         "’-T tight’",
-    #                         "-D 600",
-    #                         "-bg='Transparent'",
-    #                         "generique.dvi"], 
-    #                         cwd=tempdir)
     subprocess.check_call([ "dvipng",
                         "-T","tight",
                         "-D 600",
@@ -77,21 +85,6 @@ def text2latex(text):
             print("Analyse/Lecture de :", side.strip())
             print("Erreur dans la lecture :", sys.exc_info()[0])
     return out
-
-
-## Bibliothèque à installer
-import pyperclip as clipboard
-# from sympy import oo, I, Matrix
-# from sympy.functions import *
-from sympy.parsing.sympy_parser import parse_expr
-from sympy import latex
-import sys
-import os
-import tempfile
-import subprocess
-from platform import system
-from PyQt5.QtWidgets import*
-from PyQt5.uic import loadUi
 
 ## Définition du fonctionnement de la fenêtre
 
