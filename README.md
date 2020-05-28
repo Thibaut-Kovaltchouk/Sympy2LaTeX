@@ -70,7 +70,7 @@ Conseil pour les distribution LaTeX : MacTeX pour Mac, TeX Live pour Linux et Mi
 
 #### Guide pour rendre des fichiers exécutables
 
-* Pour mac et linux : `chmod +x DuFichier.extension` https://support.apple.com/fr-fr/guide/terminal/apdd100908f-06b3-4e63-8a87-32e71241bab4/mac
+* Pour mac et linux : `chmod +x nomDuFichier.extension` https://support.apple.com/fr-fr/guide/terminal/apdd100908f-06b3-4e63-8a87-32e71241bab4/mac
 * Pour Windows : double-cliquer sur les `\*.bat`
 
 ## Tests 
